@@ -16,14 +16,29 @@
 // Question 1
 ClubActivities
 	.Where(x => x.StartDate.Value >= new DateTime(2025, 1, 1)
-			&& x.CampusVenue.Location != "Scheduled Room"
-			&& x.Name != "BTech Club Meeting")
+			&& x.CampusVenue.Location.ToUpper() != "SCHEDULED ROOM"
+			&& x.Name.ToUpper() != "BTECH CLUB MEETING")
 	.OrderBy(x => x.StartDate)
 	.Select(x => new
 		{
-			x.StartDate,
+			StartDate = x.StartDate,
 			Location = x.CampusVenue.Location,
 			Club = x.Club.ClubName,
 			Activity = x.Name
 		})
+	.Dump();
+	
+// Question 2
+Programs
+	.Select(x => new
+		{
+			School = x.SchoolCode.ToUpper() == "SAMIT" ? "School of Applied Media and IT"
+				   : x.SchoolCode.ToUpper() == "SEET" ? "School of Electrical Engineering Technology"
+				   : "Unknown",
+			Program = x.ProgramName,
+			RequiredCourseCount = x.ProgramCourses.Count(x => x.Required),
+			OptionalCourseCount = x.ProgramCourses.Count(x => !x.Required)
+		})
+	.Where(x => x.RequiredCourseCount >= 22)
+	.OrderBy(x => x.Program)
 	.Dump();
