@@ -1,5 +1,5 @@
 # Basic Starter Kit
 
-## Owner your name
+## Antony Pang
 
-alter this statement to indicate the usage of this repository
+Repo for DMIT2018 TH1
