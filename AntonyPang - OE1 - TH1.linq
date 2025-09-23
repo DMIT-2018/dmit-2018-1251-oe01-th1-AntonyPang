@@ -18,7 +18,6 @@ ClubActivities
 	.Where(x => x.StartDate.Value >= new DateTime(2025, 1, 1)
 			&& x.CampusVenue.Location.ToUpper() != "SCHEDULED ROOM"
 			&& x.Name.ToUpper() != "BTECH CLUB MEETING")
-	.OrderBy(x => x.StartDate)
 	.Select(x => new
 		{
 			StartDate = x.StartDate,
@@ -26,6 +25,7 @@ ClubActivities
 			Club = x.Club.ClubName,
 			Activity = x.Name
 		})
+	.OrderBy(x => x.StartDate)
 	.Dump();
 	
 // Question 2
